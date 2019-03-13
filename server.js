@@ -113,6 +113,7 @@ server.use(restify.plugins.queryParser());
 server.get('/search', respondWithSearchResults);
 server.head('/search', respondWithSearchResults);
 
-server.listen(8080, () => {
+const PORT = process.env.PORT || 3000;
+server.listen(PORT, () => {
   console.log('%s listening at %s', server.name, server.url);
 });
