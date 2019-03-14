@@ -107,8 +107,8 @@ var server = restify.createServer();
 const cors = corsMiddleware({
   preflightMaxAge: 5, //Optional
   origins: ['*'],
-  allowHeaders: ['X-App-Version'],
-  exposeHeaders: []
+  credentials: true,
+  allowHeaders: ['X-App-Version']
 })
 
 server.pre(cors.preflight)
