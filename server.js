@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 var restify = require('restify');
+const corsMiddleware = require('restify-cors-middleware')
 var fetch = require('node-fetch');
 
 const baseApiUrl = 'https://api.themoviedb.org/3';
@@ -103,13 +104,14 @@ async function respondWithSearchResults(req, res, next) {
 
 var server = restify.createServer();
 
-server.use(
-  function crossOrigin(req,res,next){
-    res.header("Access-Control-Allow-Origin", "https://movie-search-react.firebaseapp.com/*");
-    res.header("Access-Control-Allow-Headers", "X-Requested-With");
-    return next();
-  }
-);
+const cors = corsMiddleware({
+  preflightMaxAge: 5, //Optional
+  origins: ['https://movie-search-react.firebaseapp.com', 'https://movie-search-react.firebaseapp.com/*'],
+  allowHeaders: ['X-Requested-With']
+})
+
+server.pre(cors.preflight)
+server.use(cors.actual)
 
 server.get('/movie/:id', respondWithMovieGivenId);
 server.head('/movie/:id', respondWithMovieGivenId);

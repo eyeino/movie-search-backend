@@ -10,7 +10,8 @@
   "license": "ISC",
   "dependencies": {
     "node-fetch": "^2.3.0",
-    "restify": "^8.1.0"
+    "restify": "^8.1.0",
+    "restify-cors-middleware": "^1.1.1"
   },
   "devDependencies": {
     "eslint": "^5.15.1"
