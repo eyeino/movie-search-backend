@@ -106,7 +106,7 @@ var server = restify.createServer();
 
 const cors = corsMiddleware({
   preflightMaxAge: 5, //Optional
-  origins: ['https://movie-search-react.firebaseapp.com', 'https://movie-search-react.firebaseapp.com/movie/*'],
+  origins: ['*'],
   credentials: true,
   allowHeaders: ['X-Requested-With']
 })
