@@ -103,6 +103,14 @@ async function respondWithSearchResults(req, res, next) {
 
 var server = restify.createServer();
 
+server.use(
+  function crossOrigin(req,res,next){
+    res.header("Access-Control-Allow-Origin", "https://movie-search-react.firebaseapp.com");
+    res.header("Access-Control-Allow-Headers", "X-Requested-With");
+    return next();
+  }
+);
+
 server.get('/movie/:id', respondWithMovieGivenId);
 server.head('/movie/:id', respondWithMovieGivenId);
 
@@ -113,7 +121,7 @@ server.use(restify.plugins.queryParser());
 server.get('/search', respondWithSearchResults);
 server.head('/search', respondWithSearchResults);
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8080;
 server.listen(PORT, () => {
   console.log('%s listening at %s', server.name, server.url);
 });
